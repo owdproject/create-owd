@@ -1,0 +1,24 @@
+{
+  "name": "create-owd",
+  "version": "0.0.1",
+  "description": "Scaffold a new Open Web Desktop project",
+  "keywords": [
+    "cli",
+    "create",
+    "starter",
+    "scaffold",
+    "owd",
+    "open-web-desktop",
+    "nuxt"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "dxlliv",
+    "url": "https://github.com/dxlliv"
+  },
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "create-owd": "./bin/create-owd.js"
+  }
+}
