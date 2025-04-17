@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
-import { spawnSync } from 'child_process';
+import { execSync } from 'child_process';
 
-spawnSync('npx', ['@owdproject/cli', 'create'], { stdio: 'inherit' });
+try {
+    execSync('npx @owdproject/cli create', { stdio: 'inherit' });
+} catch (error) {
+    console.error('✖ Error occurred during project creation:', error);
+    process.exit(1);
+}
