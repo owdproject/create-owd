@@ -11,7 +11,6 @@ const init = async () => {
     let projectDir = (process.argv[2] || '').trim();
 
     if (!projectDir) {
-        console.log('')
         // Ask for project directory name if not provided as an argument
         const answers = await inquirer.prompt([
             {
