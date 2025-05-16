@@ -52,8 +52,8 @@ const init = async () => {
         console.log(chalk.white('\nNext steps:\n'));
         console.log(`${chalk.gray('$')} ${chalk.cyan(`cd ${projectDir}`)}`);
         console.log('');
-        console.log(`${chalk.gray('$')} ${chalk.cyan('npm install')}`);
-        console.log(`${chalk.gray('$')} ${chalk.cyan('npm run dev')}\n`);
+        console.log(`${chalk.gray('$')} ${chalk.cyan('pnpm install')}`);
+        console.log(`${chalk.gray('$')} ${chalk.cyan('pnpm run dev')}\n`);
     } catch (err) {
         // If there's an error, fail the spinner and exit
         spinner.fail('Error during project setup');
