@@ -1,37 +1,51 @@
-# Create Open Web Desktop
+# create-owd
 
-`create-owd` is the official scaffolding tool to quickly start a new Open Web Desktop project.
+Scaffolds a new **[Nuxt Desktop](https://owdproject.org)** project (Open Web Desktop / `@owdproject/core`).
 
 ## Usage
 
-Run the following command to create a new project:
-
 ```bash
 npm create owd
+# or
+npm create owd my-desktop
 ```
 
-This will:
+Equivalent after installing `@owdproject/core`:
 
-- Clone the official OWD template
-- Install dependencies
-- Start the development server
+```bash
+desktop init my-desktop
+```
 
-## What You Get
+## What happens
 
-- A fully functional Open Web Desktop project based on Nuxt
-- Pre-configured template ready for development or deployment
-- Quick start experience powered by the official OWD CLI
+1. Copies the official template (from `owdproject/client` or a local `template/` in dev)
+2. Runs `pnpm install`
+3. Opens **`desktop ui`** automatically in interactive terminals (skipped in CI)
 
-## Requirements
+## After setup
 
-- Node.js v18 or higher
-- npm v9+
+```bash
+cd my-desktop
+pnpm desktop ui    # control panel (apps, themes, modules)
+pnpm run dev       # Nuxt dev server only
+```
 
-## Related
+Install mode defaults to **User (npm)** — see `.owd/settings.json` in your project.
 
-- [@owdproject/cli](https://www.npmjs.com/package/@owdproject/cli)
-The full CLI to manage your OWD project (start, generate, install apps/themes, and more)
+## Add apps, modules, and themes
 
-## License
+```bash
+pnpm desktop add @owdproject/app-todo
+pnpm desktop add @owdproject/module-fs
+pnpm desktop add @owdproject/theme-win95
+```
 
-This project is released under the [MIT License](LICENSE).
+## Development
+
+From the OWD client monorepo, sync the shared scaffold before publishing:
+
+```bash
+node create-owd/scripts/vendor-scaffold.js
+```
+
+`prepack` runs this automatically when publishing `create-owd` to npm.
