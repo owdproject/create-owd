@@ -107,23 +107,16 @@ export function canLaunchUi() {
  * @param {string} [commandName]
  */
 export function launchControlPanel(targetDir, commandName = 'desktop') {
-  const relDir = basename(targetDir)
-
   if (!canLaunchUi()) {
-    console.log(`\nNext: cd ${relDir} && pnpm desktop ui\n`)
     return false
   }
 
-  console.log('\nOpening control panel (desktop ui)…\n')
-  const result = spawnSync('pnpm', ['exec', commandName, 'ui'], {
+  console.log('\nOpening control panel (desktop)…\n')
+  spawnSync('pnpm', ['exec', commandName], {
     cwd: targetDir,
     stdio: 'inherit',
     shell: false,
   })
-
-  if (result.status !== 0 && result.status !== null) {
-    console.log(`\nControl panel exited. Run again with: cd ${relDir} && pnpm desktop ui\n`)
-  }
 
   return true
 }
@@ -133,7 +126,7 @@ export function launchControlPanel(targetDir, commandName = 'desktop') {
  */
 export async function scaffoldProject(options = {}) {
   const cwd = options.cwd ?? process.cwd()
-  const dir = (options.dir ?? 'owd-client').trim()
+  const dir = (options.dir ?? 'client').trim()
   const commandName = options.commandName ?? 'desktop'
 
   if (!dir) {
@@ -169,19 +162,12 @@ export async function scaffoldProject(options = {}) {
   console.log('\n✓ Project ready\n')
 
   if (!options.skipUi) {
-    const launched = launchControlPanel(targetDir, commandName)
-    if (launched) {
-      console.log(`\nLater: cd ${dir} && pnpm run dev · pnpm desktop ui\n`)
-    } else {
-      console.log(`  cd ${dir}`)
-      console.log('  pnpm desktop ui    # control panel')
-      console.log('  pnpm run dev       # Nuxt dev server\n')
-    }
-  } else {
-    console.log(`  cd ${dir}`)
-    console.log('  pnpm desktop ui')
-    console.log('  pnpm run dev\n')
+    launchControlPanel(targetDir, commandName)
   }
+
+  console.log(`  cd ${dir}`)
+  console.log('  pnpm install')
+  console.log('  pnpm desktop\n')
 
   return { targetDir, dir }
 }

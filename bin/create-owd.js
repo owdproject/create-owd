@@ -12,7 +12,7 @@ const init = async () => {
         type: 'input',
         name: 'dir',
         message: 'Enter the directory name for your new project:',
-        default: 'owd-client',
+        default: 'client',
       },
     ])
     projectDir = answers.dir.trim()
