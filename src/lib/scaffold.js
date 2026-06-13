@@ -107,16 +107,23 @@ export function canLaunchUi() {
  * @param {string} [commandName]
  */
 export function launchControlPanel(targetDir, commandName = 'desktop') {
+  const relDir = basename(targetDir)
+
   if (!canLaunchUi()) {
+    console.log(`\nNext: cd ${relDir} && pnpm desktop\n`)
     return false
   }
 
-  console.log('\nOpening control panel (desktop)…\n')
-  spawnSync('pnpm', ['exec', commandName], {
+  console.log('\nOpening control panel…\n')
+  const result = spawnSync('pnpm', ['exec', commandName], {
     cwd: targetDir,
     stdio: 'inherit',
     shell: false,
   })
+
+  if (result.status !== 0 && result.status !== null) {
+    console.log(`\nControl panel exited. Run again with: cd ${relDir} && pnpm desktop\n`)
+  }
 
   return true
 }
@@ -165,7 +172,7 @@ export async function scaffoldProject(options = {}) {
     launchControlPanel(targetDir, commandName)
   }
 
-  console.log(`  cd ${dir}`)
+  console.log(`  cd ${dir}\n`)
   console.log('  pnpm install')
   console.log('  pnpm desktop\n')
 

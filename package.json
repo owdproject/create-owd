@@ -1,6 +1,6 @@
 {
   "name": "create-owd",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Scaffold a new Open Web Desktop project",
   "keywords": [
     "cli",
