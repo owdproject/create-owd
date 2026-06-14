@@ -1,43 +1,56 @@
-# create-owd
+<p align="center">
+  <img width="160" height="160" src="https://avatars.githubusercontent.com/u/65117737?s=160&v=4" />
+</p>
+<h1 align="center">create-owd</h1>
+<h3 align="center">
+  Scaffold a new Open Web Desktop project.
+</h3>
 
-Scaffolds a new **[Nuxt Desktop](https://owdproject.org)** project (Open Web Desktop / `@owdproject/core`).
+---
+
+`create-owd` is the installer CLI tool for **[Open Web Desktop](https://owdproject.org)**, a modular framework for building web-based desktop experiences and digital gardens.
 
 ## Usage
 
 ```bash
+# Start interactively and choose your preferred setup type
 npm create owd
-# or
+# or specify the target folder directly
 npm create owd my-desktop
 ```
 
-Equivalent after installing `@owdproject/core`:
+You can also pass arguments to skip prompts and configure the setup directly:
 
 ```bash
-desktop init my-desktop
+# Recommended: clone the entire owdproject/client workspace repository
+npm create owd my-desktop --clone
+
+# Start from the standard template only
+npm create owd my-desktop --template
 ```
 
 ## What happens
 
-1. Copies the official template (from `owdproject/client` or a local `template/` in dev)
-2. Runs `pnpm install`
-3. Opens **`desktop ui`** automatically in interactive terminals (skipped in CI)
+1. Clones the entire `owdproject/client` repository from GitHub (recommended), or copies the official template starter structure.
+2. Runs `pnpm install` to setup all dependencies.
+3. Automatically opens the interactive control panel UI (`desktop`).
 
 ## After setup
 
 ```bash
 cd my-desktop
-pnpm desktop ui    # control panel (apps, themes, modules)
-pnpm run dev       # Nuxt dev server only
+pnpm desktop    # Open the control panel (TUI) to manage packages and dev server
+pnpm run dev    # Or start the Nuxt dev server directly
 ```
-
-Install mode defaults to **User (npm)** — see `.owd/settings.json` in your project.
 
 ## Add apps, modules, and themes
 
+Use the OWD CLI commands inside your project to easily install, import, and configure modules:
+
 ```bash
-pnpm desktop add @owdproject/app-todo
-pnpm desktop add @owdproject/module-fs
-pnpm desktop add @owdproject/theme-win95
+pnpm desktop add app-todo
+pnpm desktop add module-fs
+pnpm desktop add theme-nova
 ```
 
 ## Development

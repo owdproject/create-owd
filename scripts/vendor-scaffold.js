@@ -6,7 +6,10 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
-const src = join(root, '../packages/core/bin/lib/scaffold.js')
+let src = join(root, '../packages/core/bin/lib/scaffold.js')
+if (!existsSync(src)) {
+  src = join(root, '../client/packages/core/bin/lib/scaffold.js')
+}
 const destDir = join(root, 'src/lib')
 const dest = join(destDir, 'scaffold.js')
 
