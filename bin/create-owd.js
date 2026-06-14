@@ -50,7 +50,6 @@ const init = async () => {
   }
 
   if (questions.length > 0) {
-    console.log()
     const answers = await inquirer.prompt(questions)
     if (answers.dir) {
       projectDir = answers.dir.trim()
