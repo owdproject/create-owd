@@ -64,7 +64,7 @@ export async function cloneTemplate(targetDir, options = {}) {
   if (setupType === 'clone') {
     const repo = options.repo ?? DEFAULT_CLIENT_REPO
     console.log()
-    execSync(`git clone --depth 1 ${JSON.stringify(repo)} ${JSON.stringify(targetDir)}`, {
+    execSync(`git clone --depth 1 --recurse-submodules ${JSON.stringify(repo)} ${JSON.stringify(targetDir)}`, {
       stdio: 'inherit',
     })
     return { source: 'git', path: repo }
@@ -83,7 +83,7 @@ export async function cloneTemplate(targetDir, options = {}) {
 
   try {
     console.log()
-    execSync(`git clone --depth 1 ${JSON.stringify(repo)} ${JSON.stringify(tempClone)}`, {
+    execSync(`git clone --depth 1 --recurse-submodules ${JSON.stringify(repo)} ${JSON.stringify(tempClone)}`, {
       stdio: 'inherit',
     })
 
