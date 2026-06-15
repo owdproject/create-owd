@@ -22,7 +22,6 @@
     "create-owd": "./bin/create-owd.js"
   },
   "scripts": {
-    "prepack": "node scripts/vendor-scaffold.js"
   },
   "dependencies": {
     "inquirer": "^9.2.15"
