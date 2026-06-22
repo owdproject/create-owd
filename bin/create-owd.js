@@ -1,9 +1,34 @@
 #!/usr/bin/env node
 
 import inquirer from 'inquirer'
+import { execSync } from 'node:child_process'
 import { scaffoldProject } from '../src/lib/scaffold.js'
 
 const init = async () => {
+  // Check environment prerequisites
+  const nodeVersion = process.versions.node
+  const majorNode = parseInt(nodeVersion.split('.')[0], 10)
+  if (majorNode !== 22) {
+    console.error(`\n✗ Open Web Desktop requires Node.js version 22. Found: v${nodeVersion}`)
+    console.error(`Please install Node.js 22 to continue.\n`)
+    process.exit(1)
+  }
+
+  let hasGo = false
+  try {
+    execSync('go version', { stdio: 'ignore' })
+    hasGo = true
+  } catch (e) {
+    hasGo = false
+  }
+
+  if (!hasGo) {
+    console.error(`\n✗ Go (Golang) is not installed or not found in your PATH.`)
+    console.error(`Open Web Desktop requires Go to build the Control Panel binary.`)
+    console.error(`Please install Go (https://go.dev/) to continue.\n`)
+    process.exit(1)
+  }
+
   const args = process.argv.slice(2)
   let projectDir = ''
   let setupType = ''
