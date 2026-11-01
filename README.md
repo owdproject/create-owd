@@ -1,64 +1,30 @@
-<p align="center">
-  <img width="160" height="160" src="https://avatars.githubusercontent.com/u/65117737?s=160&v=4" />
-</p>
-<h1 align="center">create-owd</h1>
-<h3 align="center">
-  Scaffold a new Open Web Desktop project.
-</h3>
+# create-owd
 
----
+`create-owd` starts the Open Web Desktop control panel and project initializer.
+Run it in an empty directory to choose a starter and create the project there:
 
-`create-owd` is the installer CLI tool for **[Open Web Desktop](https://owdproject.org)**, a modular framework for building web-based desktop experiences and digital gardens.
-
-## Usage
-
-```bash
-# Start interactively and choose your preferred setup type
+```sh
+mkdir my-desktop && cd my-desktop
 npm create owd
-# or specify the target folder directly
+```
+
+The terminal interface shows the current path and whether it is empty before
+creating anything. Inside an existing OWD workspace it opens the control panel.
+A nonempty directory is protected from initialization. An explicit new target
+is also supported:
+
+```sh
 npm create owd my-desktop
+npm create owd my-desktop -- --framework nuxt
 ```
 
-You can also pass arguments to skip prompts and configure the setup directly:
+Nuxt is the supported control panel host. React can be selected but its host and
+control panel are not yet verified; Vue, Svelte, Angular and Astro are planned.
+After creating a Nuxt project, the initializer installs dependencies with pnpm
+and opens the control panel. Node.js, pnpm, Git and Go are required for the
+interactive Go interface. `--skip-install --skip-ui` creates the files without
+installing dependencies or opening the panel.
 
-```bash
-# Recommended: clone the entire owdproject/client workspace repository
-npm create owd my-desktop --clone
-
-# Start from the standard template only
-npm create owd my-desktop --template
-```
-
-## What happens
-
-1. Clones the entire `owdproject/client` repository from GitHub (recommended), or copies the official template starter structure.
-2. Runs `pnpm install` to setup all dependencies.
-3. Automatically opens the interactive control panel UI (`desktop`).
-
-## After setup
-
-```bash
-cd my-desktop
-pnpm desktop    # Open the control panel (TUI) to manage packages and dev server
-pnpm run dev    # Or start the Nuxt dev server directly
-```
-
-## Add apps, modules, and themes
-
-Use the OWD CLI commands inside your project to easily install, import, and configure modules:
-
-```bash
-pnpm desktop add app-todo
-pnpm desktop add module-fs
-pnpm desktop add theme-nova
-```
-
-## Development
-
-From the OWD client monorepo, sync the shared scaffold before publishing:
-
-```bash
-node create-owd/scripts/vendor-scaffold.js
-```
-
-`prepack` runs this automatically when publishing `create-owd` to npm.
+The initializer delegates to `@owdproject/cli`; starter logic belongs there.
+Local changes are not available through public `npm create owd` until both
+packages are released. Never publish snapshots to public npm.

@@ -21,9 +21,8 @@
   "bin": {
     "create-owd": "./bin/create-owd.js"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "inquirer": "^9.2.15"
+    "@owdproject/cli": "4.0.0-alpha.3"
   }
 }
